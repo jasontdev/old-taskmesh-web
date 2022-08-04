@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "./App";
 import "./index.css";
-import Layout from "./components/pages/Layout";
+import App from "./routes/App";
 import { MsalProvider } from "@azure/msal-react";
 import { PublicClientApplication } from "@azure/msal-browser";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient , QueryClientProvider} from "@tanstack/react-query";
 import CreateTasklist from "./routes/CreateTasklist";
+import TasklistRoute from "./routes/TasklistRoute";
 
 const msalConfig = {
   auth: {
@@ -29,11 +29,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<App />} />
-          </Route>
-          <Route path="/create-tasklist" element={<Layout />}>
+          <Route path="/" element={<App />}>
             <Route path="/create-tasklist" element={<CreateTasklist />} />
+            <Route path="/tasklist/:id" element={<TasklistRoute />} />
           </Route>
         </Routes>
       </BrowserRouter>

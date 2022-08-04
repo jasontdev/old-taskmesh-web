@@ -1,14 +1,12 @@
-import {
-  AuthenticatedTemplate,
-  UnauthenticatedTemplate,
-  useMsal,
-} from "@azure/msal-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import UsersTasklists from "./components/pages/UsersTasklists";
+import UsersTasklists from "../components/UsersTasklists";
 
-function App() {
+export default function App() {
   const { instance, accounts } = useMsal();
   const [accessToken, setAccessToken] = useState("");
 
@@ -37,17 +35,18 @@ function App() {
   }, []);
 
   return (
-    <div className="grid grid-cols-4 grid-rows-4 h-full">
-      <AuthenticatedTemplate>
-        {data && data.tasklists && (
-          <UsersTasklists tasklists={data.tasklists} />
-        )}
-      </AuthenticatedTemplate>
-      <UnauthenticatedTemplate>
-        <h1>Welcome to Taskmesh</h1>
-      </UnauthenticatedTemplate>
+    <div className="h-screen">
+      <Navbar />
+      <div className="grid grid-cols-4 grid-rows-4 h-full">
+        <div className="col-span-1 row-span-4">
+          {data && data.tasklists ? (
+            <UsersTasklists tasklists={data.tasklists} />
+          ) : null}
+        </div>
+        <div className="col-span-3 row-span-4">
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 }
-
-export default App;
