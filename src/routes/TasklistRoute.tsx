@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import {
-  AuthenticatedTemplate,
-  UnauthenticatedTemplate,
-  useMsal,
-} from "@azure/msal-react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import { AuthenticatedTemplate, useMsal } from "@azure/msal-react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { NewTasklist } from "../model";
+import { Tasklist } from "../model";
 import UsersTasklists from "../components/UsersTasklists";
+import TasklistView from "../components/TasklistView";
 
-function CreateTasklist() {
+function TasklistRoute() {
+  const { id } = useParams();
   const { instance, accounts } = useMsal();
   const [accessToken, setAccessToken] = useState("");
-  const [selectedTasklist, setSelectedTasklist] = useState<number>();
 
   const { data } = useQuery(["tasklists"], {
     enabled: accessToken !== "",
@@ -25,14 +23,6 @@ function CreateTasklist() {
         })
         .then((response) => response.data);
     },
-  });
-
-  const newTasklistMutation = useMutation((newTasklist: NewTasklist) => {
-    return axios
-      .post("http://localhost:8080/tasklist", newTasklist, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then((response) => response.data);
   });
 
   useEffect(() => {
@@ -49,11 +39,18 @@ function CreateTasklist() {
   return (
     <div>
       <AuthenticatedTemplate>
-        {data && data.tasklists ? <div></div> : null}
+        {id && data && data.tasklists ? (
+          <TasklistView
+            tasklist={
+              data.tasklists.filter(
+                (tasklist: Tasklist) => tasklist.id === parseInt(id)
+              )[0]
+            }
+          />
+        ) : null}
       </AuthenticatedTemplate>
-      <UnauthenticatedTemplate></UnauthenticatedTemplate>
     </div>
   );
 }
 
-export default CreateTasklist;
+export default TasklistRoute;

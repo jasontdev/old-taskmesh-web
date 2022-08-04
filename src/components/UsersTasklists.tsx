@@ -1,18 +1,20 @@
-import React from "react";
-import {Tasklist} from "../model";
+import React, { useState } from "react";
+import { Tasklist } from "../model";
+import { useNavigate } from "react-router-dom";
 
 type UsersTasklistsProps = {
   tasklists: Tasklist[];
-  selectedTasklist: number | undefined;
-  handleTasklistSelection(tasklist: number): void;
 };
 
-export default function UsersTasklists({
-  tasklists,
-  selectedTasklist,
-  handleTasklistSelection,
-}: UsersTasklistsProps) {
-  console.log(tasklists);
+export default function UsersTasklists({ tasklists }: UsersTasklistsProps) {
+  const navigate = useNavigate();
+  const [selectedTasklist, setSelectedTasklist] = useState<number>();
+
+  function selectTasklist(tasklist: number) {
+    setSelectedTasklist(tasklist);
+    navigate(`/tasklist/${tasklist}`);
+  }
+
   return (
     <div className="py-8">
       <h2 className="text-2xl font-bold px-8 pb-4">Tasklists</h2>
@@ -21,8 +23,8 @@ export default function UsersTasklists({
           {tasklists.map((list) =>
             list.id === selectedTasklist ? (
               <li
-                className="bg-gray-400 text-white px-8"
-                onClick={() => handleTasklistSelection(list.id)}
+                className="text-lg bg-gray-400 text-white px-8"
+                onClick={() => selectTasklist(list.id)}
                 key={list.id}
               >
                 {list.name}
@@ -30,8 +32,8 @@ export default function UsersTasklists({
             ) : (
               <li
                 key={list.id}
-                className="px-8"
-                onClick={() => handleTasklistSelection(list.id)}
+                className="text-lg px-8"
+                onClick={() => selectTasklist(list.id)}
               >
                 {list.name}
               </li>
