@@ -7,23 +7,16 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { NewTasklist } from "../model";
-import UsersTasklists from "../components/UsersTasklists";
+import { getUser } from "../queries";
 
 function CreateTasklist() {
   const { instance, accounts } = useMsal();
   const [accessToken, setAccessToken] = useState("");
-  const [selectedTasklist, setSelectedTasklist] = useState<number>();
 
   const { data } = useQuery(["tasklists"], {
     enabled: accessToken !== "",
-    queryFn: async () => {
-      return axios
-        .get(`http://localhost:8080/user/${accounts[0].localAccountId}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((response) => response.data);
+    queryFn: () => {
+      return getUser(accounts[0].localAccountId, accessToken);
     },
   });
 
@@ -42,7 +35,7 @@ function CreateTasklist() {
         account: accounts[0],
       })
       .then((response) => setAccessToken(response.accessToken))
-      .catch((error) => instance.loginPopup());
+      .catch(() => instance.loginPopup());
     // TODO: trigger re-fetch
   }, []);
 
