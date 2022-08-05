@@ -8,7 +8,7 @@ export type Tasklist = {
 export type NewTasklist = {
   name: string;
   tasks: NewTask[];
-  users: User[];
+  users: {id: string}[];
 }
 
 export type Task = {
