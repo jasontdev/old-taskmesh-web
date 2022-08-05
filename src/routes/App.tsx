@@ -3,23 +3,18 @@ import Navbar from "../components/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import UsersTasklists from "../components/UsersTasklists";
+import { getUser } from "../queries";
 
 export default function App() {
   const { instance, accounts } = useMsal();
   const [accessToken, setAccessToken] = useState("");
+  const navigate = useNavigate();
 
   const { data } = useQuery(["tasklists"], {
     enabled: accessToken !== "",
-    queryFn: async () => {
-      return axios
-        .get(`http://localhost:8080/user/${accounts[0].localAccountId}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((response) => response.data);
+    queryFn: () => {
+      return getUser(accounts[0].localAccountId, accessToken);
     },
   });
 
@@ -30,7 +25,7 @@ export default function App() {
         account: accounts[0],
       })
       .then((response) => setAccessToken(response.accessToken))
-      .catch((error) => instance.loginPopup());
+      .catch(() => instance.loginPopup());
     // TODO: trigger re-fetch
   }, []);
 
@@ -38,10 +33,16 @@ export default function App() {
     <div className="h-screen">
       <Navbar />
       <div className="grid grid-cols-4 grid-rows-4 h-full">
-        <div className="col-span-1 row-span-4">
+        <div className="col-span-1 row-span-4 flex flex-col">
           {data && data.tasklists ? (
             <UsersTasklists tasklists={data.tasklists} />
           ) : null}
+          <button
+            className="bg-blue-400 px-8 py-1 text-white mx-auto"
+            onClick={() => navigate("/create-tasklist")}
+          >
+            Add
+          </button>
         </div>
         <div className="col-span-3 row-span-4">
           <Outlet />

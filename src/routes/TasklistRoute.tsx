@@ -6,6 +6,7 @@ import axios from "axios";
 import { Tasklist } from "../model";
 import UsersTasklists from "../components/UsersTasklists";
 import TasklistView from "../components/TasklistView";
+import { getUser } from "../queries";
 
 function TasklistRoute() {
   const { id } = useParams();
@@ -14,14 +15,8 @@ function TasklistRoute() {
 
   const { data } = useQuery(["tasklists"], {
     enabled: accessToken !== "",
-    queryFn: async () => {
-      return axios
-        .get(`http://localhost:8080/user/${accounts[0].localAccountId}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((response) => response.data);
+    queryFn: () => {
+      return getUser(accounts[0].localAccountId, accessToken);
     },
   });
 
