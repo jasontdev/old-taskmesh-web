@@ -6,14 +6,23 @@ import {
 } from "@azure/msal-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { NewTasklist, Tasklist, User } from "../model";
-import { useForm } from "react-hook-form";
-import {Navigate, useNavigate} from "react-router-dom";
+import { NewTask, NewTasklist, Task, Tasklist, User } from "../model";
+import { useFieldArray, useForm } from "react-hook-form";
+import { Navigate, useNavigate } from "react-router-dom";
+
+type TasklistForm = {
+  name: string;
+  tasks: { name: string }[];
+};
 
 function CreateTasklist() {
   const { instance, accounts } = useMsal();
   const [accessToken, setAccessToken] = useState("");
-  const { register, handleSubmit } = useForm<NewTasklist>();
+  const { register, handleSubmit, control } = useForm<TasklistForm>();
+  const { fields, append, remove } = useFieldArray({
+    control: control,
+    name: "tasks",
+  });
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -29,9 +38,9 @@ function CreateTasklist() {
       onSuccess: (data) => {
         // The goal here is to assimilate the tasklist with the old user data before
         // navigating to the new tasklist page
-        const oldQueryData = queryClient.getQueryData<User>([ "tasklists" ]);
-        if(oldQueryData) {
-          if(oldQueryData.tasklists) {
+        const oldQueryData = queryClient.getQueryData<User>(["tasklists"]);
+        if (oldQueryData) {
+          if (oldQueryData.tasklists) {
             oldQueryData.tasklists.push(data);
           } else {
             oldQueryData.tasklists = [data];
@@ -39,7 +48,7 @@ function CreateTasklist() {
         }
         // TODO: under what circumstances might there be no query data already?
         queryClient.setQueryData(["tasklists"], oldQueryData);
-        navigate(`/tasklist/${data.id}`)
+        navigate(`/tasklist/${data.id}`);
       },
     }
   );
@@ -56,13 +65,19 @@ function CreateTasklist() {
   }, []);
 
   return (
-    <div className="p-8">
+    <div className="p-8 flex">
       <AuthenticatedTemplate>
         <form
+          className="flex flex-col gap-4"
           onSubmit={handleSubmit((data) => {
-            let newTasklist = { ...data };
-            newTasklist.users = [];
-            newTasklist.users.push({ id: accounts[0].localAccountId });
+            let newTasklist: NewTasklist = {
+              name: data.name,
+              tasks: data.tasks.map((task) => ({
+                name: task.name,
+                isComplete: false,
+              })),
+              users: [{ id: accounts[0].localAccountId }],
+            };
             newTasklistMutation.mutate(newTasklist);
           })}
         >
@@ -71,7 +86,24 @@ function CreateTasklist() {
             className="text-3xl font-bold"
             placeholder="Title"
           ></input>
-          <button type="submit" className="bg-blue-400">
+          {fields.map((field, index) => (
+            <input
+              key={field.id}
+              {...register(`tasks.${index}.name`)}
+              placeholder="Task name"
+            />
+          ))}
+          <button
+            type="button"
+            className="py-1 px-4 bg-blue-400 text-white mx-auto"
+            onClick={() => append({ name: "" })}
+          >
+            Add task
+          </button>
+          <button
+            type="submit"
+            className="py-1 px-4 bg-blue-400 text-white mx-auto"
+          >
             Save
           </button>
         </form>
