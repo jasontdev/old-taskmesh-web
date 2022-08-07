@@ -65,7 +65,7 @@ function CreateTasklist() {
   }, []);
 
   return (
-    <div className="p-8 flex">
+    <div className="p-8 flex bg-slate-200 h-full">
       <AuthenticatedTemplate>
         <form
           className="flex flex-col gap-4"
@@ -83,7 +83,7 @@ function CreateTasklist() {
         >
           <input
             {...register("name")}
-            className="text-3xl font-bold"
+            className="text-3xl font-bold bg-transparent"
             placeholder="Title"
           ></input>
           {fields.map((field, index) => (
@@ -91,6 +91,7 @@ function CreateTasklist() {
               key={field.id}
               {...register(`tasks.${index}.name`)}
               placeholder="Task name"
+              className="bg-transparent text-lg"
             />
           ))}
           <button

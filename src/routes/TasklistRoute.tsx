@@ -32,16 +32,18 @@ function TasklistRoute() {
   }, []);
 
   return (
-    <div>
+    <div className="h-full">
       <AuthenticatedTemplate>
         {id && data && data.tasklists ? (
-          <TasklistView
-            tasklist={
-              data.tasklists.filter(
-                (tasklist: Tasklist) => tasklist.id === parseInt(id)
-              )[0]
-            }
-          />
+          <div className="bg-slate-200 h-full">
+            <TasklistView
+              tasklist={
+                data.tasklists.filter(
+                  (tasklist: Tasklist) => tasklist.id === parseInt(id)
+                )[0]
+              }
+            />
+          </div>
         ) : null}
       </AuthenticatedTemplate>
     </div>

@@ -44,7 +44,7 @@ export default function App() {
             Add
           </button>
         </div>
-        <div className="col-span-3 row-span-4">
+        <div className="col-span-2 row-span-4">
           <Outlet />
         </div>
       </div>
