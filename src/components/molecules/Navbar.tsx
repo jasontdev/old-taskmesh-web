@@ -14,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex justify-between px-5 py-1 bg-gray-700 text-white">
+    <div className="flex justify-between px-5 py-1 bg-sky-800 text-white">
       <div className="font-bold">TASKMESH.XYZ</div>
       <div>
         {isAuthenticated ? (
