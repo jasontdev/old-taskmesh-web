@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
@@ -7,13 +7,11 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { NewTasklist } from "../model";
-import UsersTasklists from "../components/UsersTasklists";
+import UsersTasklists from "../components/pages/UsersTasklists";
 
 function CreateTasklist() {
   const { instance, accounts } = useMsal();
   const [accessToken, setAccessToken] = useState("");
-  const [selectedTasklist, setSelectedTasklist] = useState<number>();
-
   const { data } = useQuery(["tasklists"], {
     enabled: accessToken !== "",
     queryFn: async () => {
@@ -52,13 +50,7 @@ function CreateTasklist() {
         {data && data.tasklists ? (
           <div className="grid grid-cols-4 grid-rows-4 h-full">
             <div className="flex flex-col align-middle col-span-1 row-span-4">
-              <UsersTasklists
-                tasklists={data.tasklists}
-                selectedTasklist={selectedTasklist}
-                handleTasklistSelection={(tasklist) =>
-                  setSelectedTasklist(tasklist)
-                }
-              />
+              <UsersTasklists tasklists={data.tasklists} />
             </div>
             <div className="col-span-3 row-span-4"></div>
           </div>
