@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./Navbar";
-import {Outlet} from "react-router-dom";
+import Navbar from "../molecules/Navbar";
+import { Outlet } from "react-router-dom";
 
 export default function Layout() {
   // <Outlet /> is for react router to place nested/child routes

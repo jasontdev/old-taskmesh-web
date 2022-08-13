@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import Layout from "./components/Layout";
+import Layout from "./components/pages/Layout";
 import { MsalProvider } from "@azure/msal-react";
 import { PublicClientApplication } from "@azure/msal-browser";
-import { QueryClient , QueryClientProvider} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CreateTasklist from "./routes/CreateTasklist";
 
 const msalConfig = {
