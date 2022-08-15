@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/molecules/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
-import UsersTasklists from "../components/UsersTasklists";
+import UsersTasklists from "../components/pages/UsersTasklists";
 import { getUser } from "../queries";
+import {Box, Button, Grid, SimpleGrid} from "@chakra-ui/react";
 
 export default function App() {
   const { instance, accounts } = useMsal();
@@ -30,24 +31,18 @@ export default function App() {
   }, []);
 
   return (
-    <div className="h-screen">
+    <div>
       <Navbar />
-      <div className="grid grid-cols-4 grid-rows-4 h-full">
-        <div className="col-span-1 row-span-4 flex flex-col">
+      <SimpleGrid columns={5} gap="1rem" mt="1rem">
+        <Box px="1rem">
           {data && data.tasklists ? (
             <UsersTasklists tasklists={data.tasklists} />
           ) : null}
-          <button
-            className="bg-blue-400 px-8 py-1 text-white mx-auto"
-            onClick={() => navigate("/create-tasklist")}
-          >
-            Add
-          </button>
-        </div>
-        <div className="col-span-2 row-span-4">
+        </Box>
+        <Box >
           <Outlet />
-        </div>
-      </div>
+        </Box>
+      </SimpleGrid>
     </div>
   );
 }

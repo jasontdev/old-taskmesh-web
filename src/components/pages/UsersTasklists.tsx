@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Tasklist } from "../../model";
 import Heading2 from "../atoms/Headings/Heading2";
-import TaskList from "../molecules/TaskList";
+import TaskList from "../molecules/Tasklists";
 import TasklistView from "../molecules/TasklistView";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, Flex, Heading, IconButton } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 
 type UsersTasklistsProps = {
   tasklists: Tasklist[];
@@ -15,36 +17,29 @@ export default function UsersTasklists({ tasklists }: UsersTasklistsProps) {
   console.log(tasklists);
   return (
     <>
-      <div className="flex flex-col align-middle col-span-1 row-span-4">
-        <div className="py-8">
-          <Heading2 text="Tasklists" />
-          {tasklists.length > 0 && (
-            <TaskList
-              tasklists={tasklists}
-              onTaskSelected={(key: number) => {
-                setSelectedTask(key);
-              }}
-            />
-          )}
-        </div>
-        <button
-          className="rounded-2xl hover:bg-blue-400 bg-blue-500 py-1 px-8 font-bold text-white mx-auto"
-          onClick={() => navigate("/create-tasklist")}
-        >
-          Add
-        </button>
-      </div>
-      <div className="col-span-3 row-span-4">
-        {selectedTask && (
-          <TasklistView
-            tasklist={
-              tasklists.filter(
-                (tasklist: Tasklist) => tasklist.id === selectedTask
-              )[0]
-            }
+      <Flex flexDirection="column" gap="1rem">
+        <Heading as="h1" size="lg">
+          Tasklists
+        </Heading>
+        {tasklists.length > 0 && (
+          <TaskList
+            tasklists={tasklists}
+            onTaskSelected={(key: number) => {
+              setSelectedTask(key);
+            }}
           />
         )}
-      </div>
+        <Flex justifyContent="center">
+          <Button
+            colorScheme="blue"
+            leftIcon={<AddIcon />}
+            onClick={() => navigate("/create-tasklist")}
+            aria-label={"Add tasklist"}
+          >
+            Tasklist
+          </Button>
+        </Flex>
+      </Flex>
     </>
   );
 }
