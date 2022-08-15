@@ -65,10 +65,9 @@ function CreateTasklist() {
   }, []);
 
   return (
-    <div className="p-8 flex bg-slate-200 h-full">
+    <div>
       <AuthenticatedTemplate>
         <form
-          className="flex flex-col gap-4"
           onSubmit={handleSubmit((data) => {
             let newTasklist: NewTasklist = {
               name: data.name,
@@ -83,7 +82,6 @@ function CreateTasklist() {
         >
           <input
             {...register("name")}
-            className="text-3xl font-bold bg-transparent"
             placeholder="Title"
           ></input>
           {fields.map((field, index) => (
@@ -91,19 +89,16 @@ function CreateTasklist() {
               key={field.id}
               {...register(`tasks.${index}.name`)}
               placeholder="Task name"
-              className="bg-transparent text-lg"
             />
           ))}
           <button
             type="button"
-            className="py-1 px-4 bg-blue-400 text-white mx-auto"
             onClick={() => append({ name: "" })}
           >
             Add task
           </button>
           <button
             type="submit"
-            className="py-1 px-4 bg-blue-400 text-white mx-auto"
           >
             Save
           </button>

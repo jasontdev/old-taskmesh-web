@@ -5,9 +5,10 @@ import "./index.css";
 import App from "./routes/App";
 import { MsalProvider } from "@azure/msal-react";
 import { PublicClientApplication } from "@azure/msal-browser";
-import { QueryClient , QueryClientProvider} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CreateTasklist from "./routes/CreateTasklist";
 import TasklistRoute from "./routes/TasklistRoute";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const msalConfig = {
   auth: {
@@ -25,16 +26,18 @@ const msalInstance = new PublicClientApplication(msalConfig);
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <MsalProvider instance={msalInstance}>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="/create-tasklist" element={<CreateTasklist />} />
-            <Route path="/tasklist/:id" element={<TasklistRoute />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
-  </MsalProvider>
+  <ChakraProvider>
+    <MsalProvider instance={msalInstance}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route path="/create-tasklist" element={<CreateTasklist />} />
+              <Route path="/tasklist/:id" element={<TasklistRoute />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </MsalProvider>
+  </ChakraProvider>
 );

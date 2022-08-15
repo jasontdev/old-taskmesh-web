@@ -4,8 +4,8 @@ import { AuthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Tasklist } from "../model";
-import UsersTasklists from "../components/UsersTasklists";
-import TasklistView from "../components/TasklistView";
+import UsersTasklists from "../components/pages/UsersTasklists";
+import TasklistView from "../components/molecules/TasklistView";
 import { getUser } from "../queries";
 
 function TasklistRoute() {
@@ -32,10 +32,10 @@ function TasklistRoute() {
   }, []);
 
   return (
-    <div className="h-full">
+    <div>
       <AuthenticatedTemplate>
         {id && data && data.tasklists ? (
-          <div className="bg-slate-200 h-full">
+          <div>
             <TasklistView
               tasklist={
                 data.tasklists.filter(
