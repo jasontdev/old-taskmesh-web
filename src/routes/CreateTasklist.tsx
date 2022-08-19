@@ -9,6 +9,8 @@ import axios from "axios";
 import { NewTask, NewTasklist, Task, Tasklist, User } from "../model";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
+import { Button, Flex, IconButton, Input, Stack } from "@chakra-ui/react";
+import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
 type TasklistForm = {
   name: string;
@@ -80,28 +82,42 @@ function CreateTasklist() {
             newTasklistMutation.mutate(newTasklist);
           })}
         >
-          <input
-            {...register("name")}
-            placeholder="Title"
-          ></input>
-          {fields.map((field, index) => (
-            <input
-              key={field.id}
-              {...register(`tasks.${index}.name`)}
-              placeholder="Task name"
-            />
-          ))}
-          <button
-            type="button"
-            onClick={() => append({ name: "" })}
-          >
-            Add task
-          </button>
-          <button
-            type="submit"
-          >
-            Save
-          </button>
+          <Stack gap="1rem">
+            <Input
+              {...register("name")}
+              placeholder="Title"
+              fontSize="4xl"
+              fontWeight="bold"
+            ></Input>
+            <Stack>
+              {fields.map((field, index) => (
+                <Flex gap="1rem" key={field.id}>
+                  <Input
+                    {...register(`tasks.${index}.name`)}
+                    placeholder="Task name"
+                  />
+                  <IconButton
+                    icon={<CloseIcon />}
+                    aria-label="Remove field"
+                    onClick={() => remove(index)}
+                  ></IconButton>
+                </Flex>
+              ))}
+            </Stack>
+            <Flex gap="1rem">
+              <Button
+                type="button"
+                colorScheme="green"
+                leftIcon={<AddIcon />}
+                onClick={() => append({ name: "" })}
+              >
+                Task
+              </Button>
+              <Button type="submit" colorScheme="blue">
+                Save
+              </Button>
+            </Flex>
+          </Stack>
         </form>
       </AuthenticatedTemplate>
       <UnauthenticatedTemplate></UnauthenticatedTemplate>

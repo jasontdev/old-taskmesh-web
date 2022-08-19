@@ -28,7 +28,7 @@ export default function TasklistView({ tasklist }: TasklistViewProps) {
             </Box>
           ))}
       </Stack>
-      <Button colorScheme="blue" variant="outline" leftIcon={<AddIcon />}>
+      <Button colorScheme="blue" leftIcon={<AddIcon />}>
         Task
       </Button>
     </div>
