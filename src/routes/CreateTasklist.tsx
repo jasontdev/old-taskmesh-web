@@ -10,7 +10,7 @@ import { NewTask, NewTasklist, Task, Tasklist, User } from "../model";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Button, Flex, IconButton, Input, Stack } from "@chakra-ui/react";
-import { AddIcon, CloseIcon } from "@chakra-ui/icons";
+import { AddIcon, CloseIcon, WarningTwoIcon } from "@chakra-ui/icons";
 
 type TasklistForm = {
   name: string;
@@ -115,6 +115,13 @@ function CreateTasklist() {
               </Button>
               <Button type="submit" colorScheme="blue">
                 Save
+              </Button>
+              <Button
+                colorScheme="red"
+                leftIcon={<WarningTwoIcon />}
+                onClick={() => navigate(-1)}
+              >
+                Cancel
               </Button>
             </Flex>
           </Stack>
