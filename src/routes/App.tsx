@@ -3,7 +3,7 @@ import Navbar from "../components/molecules/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
-import TasklistSidebar from "../components/pages/TasklistSidebar";
+import TasklistSidebar from "../components/sidebars/TasklistSidebar";
 import { getUser } from "../queries";
 import {Box, Button, Grid, SimpleGrid} from "@chakra-ui/react";
 

@@ -4,8 +4,8 @@ import { AuthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Tasklist } from "../model";
-import TasklistSidebar from "../components/pages/TasklistSidebar";
-import TasklistView from "../components/molecules/TasklistView";
+import TasklistSidebar from "../components/sidebars/TasklistSidebar";
+import TasklistView from "../components/views/TasklistView";
 import { getUser } from "../queries";
 
 function TasklistRoute() {
