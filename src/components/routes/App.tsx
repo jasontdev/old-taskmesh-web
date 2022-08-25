@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
 import TasklistsSidebar from "../sidebars/tasklists/TasklistsSidebar";
@@ -10,7 +10,6 @@ import {Box, SimpleGrid} from "@chakra-ui/react";
 export default function App() {
   const { instance, accounts } = useMsal();
   const [accessToken, setAccessToken] = useState("");
-  const navigate = useNavigate();
 
   const { data } = useQuery(["tasklists"], {
     enabled: accessToken !== "",
