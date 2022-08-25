@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { Tasklist } from "../../model";
-import Heading2 from "../atoms/Headings/Heading2";
 import TaskList from "../molecules/Tasklists";
-import TasklistView from "../views/TasklistView";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Flex, Heading, IconButton } from "@chakra-ui/react";
+import { Button, Flex, Heading } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
 type UsersTasklistsProps = {
