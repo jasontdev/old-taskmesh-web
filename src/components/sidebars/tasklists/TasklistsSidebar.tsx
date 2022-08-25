@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Tasklist } from "../../model";
-import TaskList from "../molecules/Tasklists";
+import { Tasklist } from "../../../model";
+import TaskList from "./Tasklists";
 import { useNavigate } from "react-router-dom";
 import { Button, Flex, Heading } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
@@ -9,7 +9,7 @@ type UsersTasklistsProps = {
   tasklists: Tasklist[];
 };
 
-export default function TasklistSidebar({ tasklists }: UsersTasklistsProps) {
+export default function TasklistsSidebar({ tasklists }: UsersTasklistsProps) {
   const [selectedTask, setSelectedTask] = useState<number>();
   const navigate = useNavigate();
   console.log(tasklists);

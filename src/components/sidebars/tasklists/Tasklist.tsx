@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Tasklist } from "../../model";
-import Item from "../atoms/Item";
+import { Tasklist } from "../../../model";
+import Item from "./Item";
 
 type Props = {
   tasklists: Tasklist[];
   onTaskSelected: (id: number) => void;
 };
 
-export default function (props: Props) {
+export default function Tasklist(props: Props) {
   const [selectedTasklist, setSelectedTasklist] = useState<number>();
   const handleTasklistSelection = (id: number) => {
     setSelectedTasklist(id);
@@ -15,16 +15,15 @@ export default function (props: Props) {
   };
   const { tasklists } = props;
   return (
-    <div>
+    <ul>
       {tasklists.map((list) => (
         <Item
           id={list.id}
           isSelected={list.id === selectedTasklist}
           onItemClick={(key) => handleTasklistSelection(key)}
           value={list.name}
-          key={list.id}
         />
       ))}
-    </div>
+    </ul>
   );
 }

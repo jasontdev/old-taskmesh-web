@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
-import App from "./routes/App";
+import App from "./components/routes/App";
 import { MsalProvider } from "@azure/msal-react";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import CreateTasklist from "./routes/CreateTasklist";
-import TasklistRoute from "./routes/TasklistRoute";
+import CreateTasklist from "./components/routes/CreateTasklist";
+import TasklistRoute from "./components/routes/TasklistRoute";
 import { ChakraProvider } from "@chakra-ui/react";
 
 const msalConfig = {

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
-import { Tasklist } from "../model";
-import TasklistView from "../components/views/TasklistView";
-import { getUser } from "../queries";
+import { Tasklist } from "../../model";
+import TasklistView from "../views/tasklist/TasklistView";
+import { getUser } from "../../queries";
 
 function TasklistRoute() {
   const { id } = useParams();

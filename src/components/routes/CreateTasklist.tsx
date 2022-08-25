@@ -6,7 +6,7 @@ import {
 } from "@azure/msal-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { NewTasklist, User } from "../model";
+import { NewTasklist, User } from "../../model";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button, Flex, IconButton, Input, Stack } from "@chakra-ui/react";

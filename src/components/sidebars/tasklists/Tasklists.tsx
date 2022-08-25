@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Tasklist } from "../../model";
-import Item from "../atoms/Item";
+import { Tasklist } from "../../../model";
+import Item from "./Item";
 
 type Props = {
   tasklists: Tasklist[];
@@ -15,15 +15,16 @@ export default function (props: Props) {
   };
   const { tasklists } = props;
   return (
-    <ul>
+    <div>
       {tasklists.map((list) => (
         <Item
           id={list.id}
           isSelected={list.id === selectedTasklist}
           onItemClick={(key) => handleTasklistSelection(key)}
           value={list.name}
+          key={list.id}
         />
       ))}
-    </ul>
+    </div>
   );
 }

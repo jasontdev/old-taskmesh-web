@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/molecules/Navbar";
+import Navbar from "../Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
-import TasklistSidebar from "../components/sidebars/TasklistSidebar";
-import { getUser } from "../queries";
+import TasklistsSidebar from "../sidebars/tasklists/TasklistsSidebar";
+import { getUser } from "../../queries";
 import {Box, SimpleGrid} from "@chakra-ui/react";
 
 export default function App() {
@@ -36,7 +36,7 @@ export default function App() {
       <SimpleGrid columns={5} gap="1rem" mt="1rem">
         <Box px="1rem">
           {data && data.tasklists ? (
-            <TasklistSidebar tasklists={data.tasklists} />
+            <TasklistsSidebar tasklists={data.tasklists} />
           ) : null}
         </Box>
         <Box >
