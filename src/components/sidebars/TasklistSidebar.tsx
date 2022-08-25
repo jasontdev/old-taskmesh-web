@@ -11,7 +11,7 @@ type UsersTasklistsProps = {
   tasklists: Tasklist[];
 };
 
-export default function UsersTasklists({ tasklists }: UsersTasklistsProps) {
+export default function TasklistSidebar({ tasklists }: UsersTasklistsProps) {
   const [selectedTask, setSelectedTask] = useState<number>();
   const navigate = useNavigate();
   console.log(tasklists);

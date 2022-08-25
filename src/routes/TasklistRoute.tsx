@@ -4,7 +4,7 @@ import { AuthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Tasklist } from "../model";
-import UsersTasklists from "../components/pages/UsersTasklists";
+import TasklistSidebar from "../components/pages/TasklistSidebar";
 import TasklistView from "../components/molecules/TasklistView";
 import { getUser } from "../queries";
 
