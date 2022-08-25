@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Tasklist } from "../../model";
 import Item from "../atoms/Item";
-import {Stack} from "@chakra-ui/react";
 
 type Props = {
   tasklists: Tasklist[];

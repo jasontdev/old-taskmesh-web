@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/molecules/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
 import TasklistSidebar from "../components/sidebars/TasklistSidebar";
 import { getUser } from "../queries";
-import {Box, Button, Grid, SimpleGrid} from "@chakra-ui/react";
+import {Box, SimpleGrid} from "@chakra-ui/react";
 
 export default function App() {
   const { instance, accounts } = useMsal();

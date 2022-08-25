@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
@@ -6,9 +6,9 @@ import {
 } from "@azure/msal-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { NewTask, NewTasklist, Task, Tasklist, User } from "../model";
+import { NewTasklist, User } from "../model";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Flex, IconButton, Input, Stack } from "@chakra-ui/react";
 import { AddIcon, CloseIcon, WarningTwoIcon } from "@chakra-ui/icons";
 

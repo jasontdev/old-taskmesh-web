@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { Tasklist } from "../model";
-import TasklistSidebar from "../components/sidebars/TasklistSidebar";
 import TasklistView from "../components/views/TasklistView";
 import { getUser } from "../queries";
 
