@@ -14,7 +14,14 @@ export default function Navbar() {
   };
 
   return (
-    <Flex justifyContent="space-between" px="1rem" py="0.25rem" bgColor="darkslateblue" alignItems="center" color="white">
+    <Flex
+      justifyContent="space-between"
+      px="1rem"
+      py="0.25rem"
+      bgColor="darkslateblue"
+      alignItems="center"
+      color="white"
+    >
       <Heading as="h1" size="md">
         TASKMESH.XYZ
       </Heading>

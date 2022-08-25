@@ -18,7 +18,15 @@ export default function TasklistView({ tasklist }: TasklistViewProps) {
       <Stack py="1rem">
         {tasklist.tasks &&
           tasklist.tasks.map((task) => (
-            <Box borderWidth="0.1rem" borderStyle="solid" borderColor="royalblue" key={task.id} borderRadius="md" py="0.2rem" px="0.5rem">
+            <Box
+              borderWidth="0.1rem"
+              borderStyle="solid"
+              borderColor="royalblue"
+              key={task.id}
+              borderRadius="md"
+              py="0.2rem"
+              px="0.5rem"
+            >
               <Checkbox
                 size="lg"
                 onChange={(e) => console.log(e.target.checked)}

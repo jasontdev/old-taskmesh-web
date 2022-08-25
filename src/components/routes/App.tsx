@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
-import { Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
 import TasklistsSidebar from "../sidebars/tasklists/TasklistsSidebar";
 import { getUser } from "../../queries";
-import {Box, SimpleGrid} from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 
 export default function App() {
   const { instance, accounts } = useMsal();
@@ -38,7 +38,7 @@ export default function App() {
             <TasklistsSidebar tasklists={data.tasklists} />
           ) : null}
         </Box>
-        <Box >
+        <Box>
           <Outlet />
         </Box>
       </SimpleGrid>
