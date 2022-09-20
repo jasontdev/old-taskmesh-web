@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Heading, Stack } from "@chakra-ui/react";
+import { Box, Button, Heading, Stack } from "@chakra-ui/react";
 import axios from "axios";
 import { useMsal } from "@azure/msal-react";
 import { useMutation } from "@tanstack/react-query";
@@ -39,8 +39,8 @@ function Welcome() {
     }
   );
   return (
-    <div>
-      <Heading as="h1" size="2xl">
+    <Box width={"100%"}>
+      <Heading as="h2" size="xl">
         Welcome to Taskmesh
       </Heading>
       <div>
@@ -52,7 +52,7 @@ function Welcome() {
           Create Taskmesh Profile
         </Button>
       </div>
-    </div>
+    </Box>
   );
 }
 
