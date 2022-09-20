@@ -26,3 +26,7 @@ export type User = {
   id: string;
   tasklists?: Tasklist[];
 };
+
+export type GetUserResponse = {
+  data: User;
+}

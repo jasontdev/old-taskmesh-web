@@ -1,21 +1,32 @@
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
 import { useQuery } from "@tanstack/react-query";
 import TasklistsSidebar from "../sidebars/tasklists/TasklistsSidebar";
 import { getUser } from "../../queries";
 import { Box, SimpleGrid } from "@chakra-ui/react";
+import axios, { AxiosError } from "axios";
+import { User } from "../../model";
 
 export default function App() {
   const { instance, accounts } = useMsal();
   const [accessToken, setAccessToken] = useState("");
+  const navigate = useNavigate();
 
-  const { data } = useQuery(["tasklists"], {
+  const { data } = useQuery<Promise<User>, AxiosError>(["tasklists"], {
     enabled: accessToken !== "",
-    queryFn: () => {
+    queryFn: (): Promise<User> => {
       return getUser(accounts[0].localAccountId, accessToken);
     },
+    onError: (error) => {
+      if(axios.isAxiosError(error)) {
+        if(error.response && error.response.status === 404) {
+          // user not found. navigate to welcome/onboarding component
+          navigate("/welcome");
+        }
+      }
+    }
   });
 
   useEffect(() => {
