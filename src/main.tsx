@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CreateTasklist from "./components/routes/CreateTasklist";
 import TasklistRoute from "./components/routes/TasklistRoute";
 import { ChakraProvider } from "@chakra-ui/react";
+import Welcome from "./components/routes/Welcome";
 
 const msalConfig = {
   auth: {
@@ -33,6 +34,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="/" element={<App />}>
               <Route path="/create-tasklist" element={<CreateTasklist />} />
               <Route path="/tasklist/:id" element={<TasklistRoute />} />
+              <Route path="/welcome" element={<Welcome />}/>
             </Route>
           </Routes>
         </BrowserRouter>
