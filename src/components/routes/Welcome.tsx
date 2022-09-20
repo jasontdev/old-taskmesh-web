@@ -34,7 +34,7 @@ function Welcome() {
     },
     {
       onSuccess: () => {
-        Navigate("/");
+        navigate("/");
       },
     }
   );
