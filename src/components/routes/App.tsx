@@ -1,5 +1,5 @@
 import { useMsal } from "@azure/msal-react";
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
@@ -44,14 +44,14 @@ export default function App() {
     <div>
       <Navbar />
       <SimpleGrid columns={5} gap="1rem" mt="1rem">
-        <Box px="1rem">
+        <GridItem colSpan={1} px="1rem">
           {data && data.tasklists ? (
             <TasklistsSidebar tasklists={data.tasklists} />
           ) : null}
-        </Box>
-        <Box>
+        </GridItem>
+        <GridItem colSpan={4}>
           <Outlet />
-        </Box>
+        </GridItem>
       </SimpleGrid>
     </div>
   );
