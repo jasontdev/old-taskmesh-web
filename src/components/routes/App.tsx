@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import Navbar from "../Navbar";
-import { Outlet, useNavigate } from "react-router-dom";
 import { useMsal } from "@azure/msal-react";
-import { useQuery } from "@tanstack/react-query";
-import TasklistsSidebar from "../sidebars/tasklists/TasklistsSidebar";
-import { getUser } from "../../queries";
 import { Box, SimpleGrid } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
+import { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import { User } from "../../model";
+import { getUser } from "../../queries";
+import Navbar from "../Navbar";
+import TasklistsSidebar from "../sidebars/tasklists/TasklistsSidebar";
 
 export default function App() {
   const { instance, accounts } = useMsal();
